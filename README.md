@@ -8,8 +8,5 @@
 
 # Projeto Integrador
 
-<!-- Substitua a seguinte imagem por uma logo do seu projeto -->
-<img src="img/logo.png" width="150px">
-
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
 Para apresentação do meu projeto desenvolvi um site cuja finalidade é cadastrar e exibir dados relacionados aos alunos da universidade ficiticia Mariana Leme.
