@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Aluno</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="mb-4">Adicionar Aluno</h2>
+            <form action="{% url 'adicionar_aluno' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required placeholder="Digite o Nome Completo">
+                </div>
+                <div class="form-group">
+                    <label for="numero_matricula">Numero de Matrícula:</label>
+                    <input type="text" class="form-control" id="numero_matricula" name="numero_matricula" required placeholder="Digite o Numero de Matrícula">
+                </div>
+                <div class="form-group">
+                    <label for="curso">Curso:</label>
+                    <select class="form-control" id="curso" name="curso" required>
+                        <option value="" selected disabled>Selecione o Curso</option>
+                        {% for curso in cursos %}
+                        <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Digite o E-mail">
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <select class="form-control" id="estado" name="estado" required>
+                        <option value="" selected disabled>Selecione o Estado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade:</label>
+                    <select class="form-control" id="cidade" name="cidade" required>
+                        <option value="" selected disabled>Selecione a Cidade</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" required placeholder="Digite o Endereço">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" class="form-control" id="telefone" name="telefone" required placeholder="Digite o Telefone">
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-back">Voltar</a>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function carregarEstados() {
+            fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+                .then(response => response.json())
+                .then(data => {
+                    const estadoSelect = document.getElementById('estado');
+                    estadoSelect.innerHTML = '<option value="" selected disabled>Selecione o Estado</option>';
+                    data.forEach(estado => {
+                        estadoSelect.innerHTML += `<option value="${estado.id}">${estado.nome}</option>`;
+                    });
+                });
+        }
+
+        function carregarCidades(estadoId) {
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoId}/municipios?orderBy=nome`)
+                .then(response => response.json())
+                .then(data => {
+                    const cidadeSelect = document.getElementById('cidade');
+                    cidadeSelect.disabled = false;
+                    cidadeSelect.innerHTML = '<option value="" selected disabled>Selecione a Cidade</option>';
+                    data.forEach(cidade => {
+                        cidadeSelect.innerHTML += `<option value="${cidade.id}">${cidade.nome}</option>`;
+                    });
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            carregarEstados();
+        });
+
+        document.getElementById('estado').addEventListener('change', function () {
+            const estadoId = this.value;
+            if (estadoId) {
+                carregarCidades(estadoId);
+            } else {
+                const cidadeSelect = document.getElementById('cidade');
+                cidadeSelect.disabled = true;
+                cidadeSelect.innerHTML = '<option value="" selected disabled>Selecione o Estado primeiro</option>';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

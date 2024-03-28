@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Aluno - UniManager</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="mb-4">Atualizar Aluno</h2>
+            <form action="{% url 'atualizar_aluno' aluno.id %}" method="POST">
+                {% csrf_token %}
+                <!-- Campo para inserir o nome completo do aluno -->
+                <div class="form-group">
+                    <label for="nome_completo">Nome Completo:</label>
+                    <input type="text" class="form-control" id="nome_completo" name="nome_completo"
+                        value="{{ aluno.nome_completo }}" required>
+                </div>
+                <!-- Campo para inserir a matrícula do aluno -->
+                <div class="form-group">
+                    <label for="matricula">Matrícula:</label>
+                    <input type="text" class="form-control" id="matricula" name="matricula"
+                        value="{{ aluno.matricula }}" required>
+                </div>
+                <!-- Campo para inserir o curso em que está matriculado -->
+                <div class="form-group">
+                    <label for="curso">Curso:</label>
+                    <select class="form-control" id="curso" name="curso" required>
+                        {% for curso in cursos %}
+                        <option value="{{ curso.id }}" {% if curso.id==aluno.curso.id %} selected {% endif %}>{{
+                            curso.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Campo para inserir o e-mail do aluno -->
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ aluno.email }}" required>
+                </div>
+                <!-- Campo para inserir o endereço do aluno -->
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" value="{{ aluno.endereco }}"
+                        required>
+                </div>
+                <!-- Campo para inserir o telefone do aluno -->
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" class="form-control" id="telefone" name="telefone" value="{{ aluno.telefone }}"
+                        required>
+                </div>
+                <!-- Botão para submeter o formulário -->
+                <button type="submit" class="btn btn-primary">Atualizar Aluno</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

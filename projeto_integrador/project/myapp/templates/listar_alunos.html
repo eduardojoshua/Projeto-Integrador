@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Alunos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mb-4">Listagem de Alunos</h2>
+
+        <div class="row">
+            {% for aluno in alunos %}
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">{{ aluno.nome }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Numero de Matrícula:</strong> {{ aluno.numero_matricula }}</p>
+                        <p><strong>Curso:</strong> {{ aluno.curso }}</p>
+                        <p><strong>E-mail:</strong> {{ aluno.email }}</p>
+                        <p><strong>Data de Matricula:</strong> {{ aluno.data_matricula }}</p>
+                        <p><strong>Endereço:</strong> {{ aluno.endereco }}</p>
+                        <p><strong>Cidade:</strong> {{ aluno.cidade }}</p>
+                        <p><strong>Estado:</strong> {{ aluno.estado }}</p>
+                        <p><strong>Telefone:</strong> {{ aluno.telefone }}</p>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-back">Voltar</a>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
