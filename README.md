@@ -4,9 +4,9 @@
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-**Este projeto foi desenvolvido como atividade final do curso de capacitação em Python da Cyber Edux, realizado de setembro de 2023 até março de 2024. Para mais informações, consulte o [enunciado](ENUNCIADO.md).**
+**Este projeto foi desenvolvido como atividade final do curso de capacitação em Python da Cyber Edux, realizado de setembro de 2023 até março de 2024.**
 
 # Projeto Integrador
 
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
-Para apresentação do meu projeto desenvolvi um site cuja finalidade é cadastrar e exibir dados relacionados aos alunos da universidade ficiticia Mariana Leme.
+Para apresentação do meu projeto, desenvolvi um site cuja finalidade é cadastrar e exibir dados relacionados aos alunos da universidade ficiticia Mariana Leme.
